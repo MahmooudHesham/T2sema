@@ -10,7 +10,6 @@ class PlayerSelectionView extends StatefulWidget {
 }
 
 class _PlayerSelectionViewState extends State<PlayerSelectionView> {
-  // 1. Temporary Data: List of 10 Dummy Players
   final List<String> playerNames = [
     "Mahmoud Hesham",
     "Ahmed Ali",
@@ -24,7 +23,6 @@ class _PlayerSelectionViewState extends State<PlayerSelectionView> {
     "Karim Benzema",
   ];
 
-  // 2. Selection State: Stores the 'index' of every selected player
   final Set<int> selectedIndices = {};
 
   @override
@@ -36,30 +34,42 @@ class _PlayerSelectionViewState extends State<PlayerSelectionView> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: ListView.builder(
-          itemCount: playerNames.length,
-          itemBuilder: (context, index) {
-            final bool isSelected = selectedIndices.contains(index);
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 10),
-              child: PlayerCard(
-                name: playerNames[index],
-                image: index == 0
-                    ? 'assets/images/IMG-20220820-WA0029-01.jpeg'
-                    : null,
-                isSelected: isSelected,
-                onTap: () {
-                  setState(() {
-                    if (isSelected) {
-                      selectedIndices.remove(index); // Deselect
-                    } else {
-                      selectedIndices.add(index); // Select
-                    }
-                  });
+        child: Column(
+          children: [
+            const SizedBox(height: 30),
+            Text(
+              'Player Selected #${selectedIndices.length}',
+              style: AppStyles.textStyleSemiBold16,
+            ),
+            const SizedBox(height: 30),
+            Expanded(
+              child: ListView.builder(
+                itemCount: playerNames.length,
+                itemBuilder: (context, index) {
+                  final bool isSelected = selectedIndices.contains(index);
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    child: PlayerCard(
+                      name: playerNames[index],
+                      image: index == 0
+                          ? 'assets/images/IMG-20220820-WA0029-01.jpeg'
+                          : null,
+                      isSelected: isSelected,
+                      onTap: () {
+                        setState(() {
+                          if (isSelected) {
+                            selectedIndices.remove(index);
+                          } else {
+                            selectedIndices.add(index);
+                          }
+                        });
+                      },
+                    ),
+                  );
                 },
               ),
-            );
-          },
+            ),
+          ],
         ),
       ),
     );
