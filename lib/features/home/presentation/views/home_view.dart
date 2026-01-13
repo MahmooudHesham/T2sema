@@ -26,19 +26,25 @@ class _HomeViewState extends State<HomeView> {
       body: Stack(
         children: [
           _pages[currentIndex],
-          const Positioned(left: 20, bottom: 125, child: AddPlayerButton()),
-          const Positioned(right: 20, bottom: 125, child: GenerateTeamButton()),
           Align(
             alignment: Alignment.bottomCenter,
             child: Padding(
               padding: const EdgeInsets.only(bottom: 30),
-              child: CustomBottomNavBar(
-                currentIndex: currentIndex,
-                onTap: (index) {
-                  setState(() {
-                    currentIndex = index;
-                  });
-                },
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+                children: [
+                  const AddPlayerButton(),
+                  CustomBottomNavBar(
+                    currentIndex: currentIndex,
+                    onTap: (index) {
+                      setState(() {
+                        currentIndex = index;
+                      });
+                    },
+                  ),
+                  const GenerateTeamButton(),
+                ],
               ),
             ),
           ),
