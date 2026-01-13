@@ -19,7 +19,7 @@ class GlassButton extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: GlassContainer(
-        blurStrength: 1.5,
+        blurStrength: 2,
         width: width,
         height: 70,
         child: ButtonAction(title: title, iconPath: iconPath),

@@ -10,7 +10,7 @@ class AddPlayerButton extends StatelessWidget {
       title: 'Add Player',
       iconPath: 'assets/icons/ic_add_player.svg',
       onTap: () {},
-      width: 170,
+      width: 155,
     );
   }
 }

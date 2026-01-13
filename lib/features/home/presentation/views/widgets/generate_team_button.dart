@@ -8,9 +8,9 @@ class GenerateTeamButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GlassButton(
       title: 'Generate Teams',
-      iconPath: 'iconPath',
+      iconPath: 'assets/icons/ic_done.svg',
       onTap: () {},
-      width: 170,
+      width: 200,
     );
   }
 }

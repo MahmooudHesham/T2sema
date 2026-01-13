@@ -36,6 +36,11 @@ abstract class AppStyles {
   // =========================
   // Medium (w500)
   // =========================
+  static final TextStyle textStyleMedium14 = _baseStyle.copyWith(
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+  );
+
   static final TextStyle textStyleMedium16 = _baseStyle.copyWith(
     fontSize: 16,
     fontWeight: FontWeight.w500,
