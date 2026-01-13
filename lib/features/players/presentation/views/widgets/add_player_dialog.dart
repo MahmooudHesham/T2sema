@@ -1,11 +1,34 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:t2sema/core/widgets/custom_button.dart';
 import 'package:t2sema/core/widgets/custom_text_form_field.dart';
 import 'package:t2sema/core/widgets/glass_container.dart';
 import 'package:t2sema/features/players/presentation/views/widgets/player_image_picker.dart';
 
-class AddPlayerDialog extends StatelessWidget {
+class AddPlayerDialog extends StatefulWidget {
   const AddPlayerDialog({super.key});
+
+  @override
+  State<AddPlayerDialog> createState() => _AddPlayerDialogState();
+}
+
+class _AddPlayerDialogState extends State<AddPlayerDialog> {
+  final GlobalKey<FormState> formKey = GlobalKey();
+  late final TextEditingController nameController;
+  AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
+
+  @override
+  void initState() {
+    super.initState();
+    nameController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    nameController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,36 +36,56 @@ class AddPlayerDialog extends StatelessWidget {
       backgroundColor: Colors.transparent,
       insetPadding: const EdgeInsets.symmetric(horizontal: 20),
       child: GlassContainer(
-        opacity: 204,
+        opacity: 200,
         width: double.infinity,
-        height: 350,
         borderRadius: 12,
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 20),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  CustomTextFormField(
-                    hintText: 'Player Name',
-                    validator: addPlayerNameValidator,
-                  ),
-                  const SizedBox(height: 30),
-                  PlayerImagePicker(onTap: () {}),
-                  const SizedBox(height: 30),
-                  CustomButton(label: 'Add', onTap: () {}),
-                ],
-              ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
+          child: Form(
+            key: formKey,
+            autovalidateMode: autovalidateMode,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                CustomTextFormField(
+                  hintText: 'Player Name',
+                  controller: nameController,
+                  validator: _validateName,
+                ),
+                const SizedBox(height: 30),
+                PlayerImagePicker(
+                  onTap: () {
+                    // TODO: Implement image selection
+                  },
+                ),
+                const SizedBox(height: 30),
+                CustomButton(
+                  label: 'Add',
+                  onTap: () {
+                    _onAddPlayer(context);
+                  },
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
   }
 
-  String? addPlayerNameValidator(value) {
-    if (value == null || value.isEmpty) {
+  void _onAddPlayer(BuildContext context) {
+    if (formKey.currentState!.validate()) {
+      log("Player Name: ${nameController.text}");
+      Navigator.pop(context);
+    } else {
+      setState(() {
+        autovalidateMode = AutovalidateMode.always;
+      });
+    }
+  }
+
+  String? _validateName(String? value) {
+    if (value == null || value.trim().isEmpty) {
       return "Name is required";
     }
     return null;
