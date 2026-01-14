@@ -15,23 +15,21 @@ class PlayersListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return ListView.separated(
+      physics: const BouncingScrollPhysics(),
       padding: const EdgeInsets.only(bottom: 120),
       itemCount: playerNames.length,
+      separatorBuilder: (context, index) => const SizedBox(height: 20),
       itemBuilder: (context, index) {
         final bool isSelected = selectedIndices.contains(index);
-
-        return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 10),
-          child: PlayerCard(
-            name: playerNames[index],
-            // TODO: Replace with real image logic later
-            image: index == 0
-                ? 'assets/images/IMG-20220820-WA0029-01.jpeg'
-                : null,
-            isSelected: isSelected,
-            onTap: () => onPlayerToggle(index),
-          ),
+        return PlayerCard(
+          name: playerNames[index],
+          // TODO: Replace with real image logic later
+          image: index == 0
+              ? 'assets/images/IMG-20220820-WA0029-01.jpeg'
+              : null,
+          isSelected: isSelected,
+          onTap: () => onPlayerToggle(index),
         );
       },
     );
