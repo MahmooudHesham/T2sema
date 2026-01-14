@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
+import 'package:t2sema/core/utils/app_router.dart';
 import 'package:t2sema/core/widgets/glass_circle_button.dart';
 
 class GenerateTeamButton extends StatelessWidget {
@@ -8,7 +10,14 @@ class GenerateTeamButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GlassCircleButton(
       iconPath: 'assets/icons/ic_generate.svg',
-      onTap: () {},
+      onTap: () {
+        final dummyA = ["Mahmoud", "Salah", "Nasooh", "Messi"];
+        final dummyB = ["Ronaldo", "Nussairy", "ElKholy", "Mbappe"];
+        context.push(
+          AppRouter.kGeneratedTeamsView,
+          extra: {'teamA': dummyA, 'teamB': dummyB},
+        );
+      },
     );
   }
 }
