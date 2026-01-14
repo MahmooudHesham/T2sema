@@ -28,6 +28,11 @@ abstract class AppStyles {
     fontWeight: FontWeight.normal, // w400
   );
 
+  static final TextStyle textStyleRegular14 = _baseStyle.copyWith(
+    fontSize: 14,
+    fontWeight: FontWeight.normal, // w400
+  );
+
   static final TextStyle textStyleRegular16 = _baseStyle.copyWith(
     fontSize: 16,
     fontWeight: FontWeight.normal, // w400
