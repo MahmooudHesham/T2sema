@@ -12,15 +12,15 @@ class PlayerSelectionView extends StatefulWidget {
 class _PlayerSelectionViewState extends State<PlayerSelectionView> {
   final List<String> playerNames = [
     "Mahmoud Hesham",
-    "Ahmed Ali",
-    "Mohamed Salah",
-    "Omar Tarek",
-    "Youssef Nabil",
-    "Khaled Hossam",
-    "Ibrahim Adel",
-    "Hassan Moustafa",
-    "Ziad Amr",
-    "Karim Benzema",
+    "Nasooh Nabil",
+    "Muhammed AlKady",
+    "ElKholy",
+    "Khalaf",
+    "Mahmoud Hamed",
+    "Ahmed Hesham",
+    "Nussairy",
+    "MO Salah",
+    "Messi",
   ];
 
   final Set<int> selectedIndices = {};
