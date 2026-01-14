@@ -99,7 +99,7 @@ void showAddPlayerDialog(BuildContext context) {
     barrierDismissible: true,
     barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
     barrierColor: Colors.black.withAlpha(150),
-    transitionDuration: const Duration(milliseconds: 250),
+    transitionDuration: const Duration(milliseconds: 200),
     pageBuilder: (context, animation, secondaryAnimation) {
       return const AddPlayerDialog();
     },
@@ -110,7 +110,7 @@ void showAddPlayerDialog(BuildContext context) {
         reverseCurve: Curves.easeInCubic,
       );
       return ScaleTransition(
-        scale: Tween<double>(begin: 0.7, end: 1.0).animate(curvedAnimation),
+        scale: Tween<double>(begin: 0.8, end: 1.0).animate(curvedAnimation),
         child: FadeTransition(opacity: curvedAnimation, child: child),
       );
     },
