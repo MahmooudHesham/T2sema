@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:t2sema/features/home/presentation/views/widgets/custom_app_bar.dart';
+import 'package:t2sema/features/match/presentation/views/widgets/generated_teams_view_body.dart';
 
 class GeneratedTeamsView extends StatelessWidget {
   const GeneratedTeamsView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(body: Center(child: Text('Match view')));
+    return const Scaffold(
+      appBar: CustomAppBar(),
+      body: GeneratedTeamsViewBody(),
+    );
   }
 }
