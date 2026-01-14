@@ -10,12 +10,7 @@ class AddPlayerButton extends StatelessWidget {
     return GlassCircleButton(
       iconPath: 'assets/icons/ic_add_player.svg',
       onTap: () {
-        showDialog(
-          context: context,
-          builder: (context) {
-            return const AddPlayerDialog();
-          },
-        );
+        showAddPlayerDialog(context);
       },
     );
   }

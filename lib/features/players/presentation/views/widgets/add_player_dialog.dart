@@ -34,37 +34,39 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
     return Dialog(
       backgroundColor: Colors.transparent,
       insetPadding: const EdgeInsets.symmetric(horizontal: 20),
-      child: GlassContainer(
-        opacity: 200,
-        width: double.infinity,
-        borderRadius: 12,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
-          child: Form(
-            key: formKey,
-            autovalidateMode: autovalidateMode,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                CustomTextFormField(
-                  hintText: 'Player Name',
-                  controller: nameController,
-                  validator: _validateName,
-                ),
-                const SizedBox(height: 30),
-                PlayerImagePicker(
-                  onTap: () {
-                    // TODO: Implement image selection
-                  },
-                ),
-                const SizedBox(height: 30),
-                CustomButton(
-                  label: 'Add',
-                  onTap: () {
-                    _onAddPlayer(context);
-                  },
-                ),
-              ],
+      child: RepaintBoundary(
+        child: GlassContainer(
+          opacity: 200,
+          width: double.infinity,
+          borderRadius: 12,
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
+            child: Form(
+              key: formKey,
+              autovalidateMode: autovalidateMode,
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CustomTextFormField(
+                    hintText: 'Player Name',
+                    controller: nameController,
+                    validator: _validateName,
+                  ),
+                  const SizedBox(height: 30),
+                  PlayerImagePicker(
+                    onTap: () {
+                      // TODO: Implement image selection
+                    },
+                  ),
+                  const SizedBox(height: 30),
+                  CustomButton(
+                    label: 'Add',
+                    onTap: () {
+                      _onAddPlayer(context);
+                    },
+                  ),
+                ],
+              ),
             ),
           ),
         ),
@@ -89,4 +91,28 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
     }
     return null;
   }
+}
+
+void showAddPlayerDialog(BuildContext context) {
+  showGeneralDialog(
+    context: context,
+    barrierDismissible: true,
+    barrierLabel: MaterialLocalizations.of(context).modalBarrierDismissLabel,
+    barrierColor: Colors.black.withAlpha(150),
+    transitionDuration: const Duration(milliseconds: 250),
+    pageBuilder: (context, animation, secondaryAnimation) {
+      return const AddPlayerDialog();
+    },
+    transitionBuilder: (context, animation, secondaryAnimation, child) {
+      final curvedAnimation = CurvedAnimation(
+        parent: animation,
+        curve: Curves.easeOutCubic,
+        reverseCurve: Curves.easeInCubic,
+      );
+      return ScaleTransition(
+        scale: Tween<double>(begin: 0.7, end: 1.0).animate(curvedAnimation),
+        child: FadeTransition(opacity: curvedAnimation, child: child),
+      );
+    },
+  );
 }
