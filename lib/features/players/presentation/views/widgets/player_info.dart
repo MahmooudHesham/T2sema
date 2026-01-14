@@ -18,12 +18,10 @@ class PlayerInfo extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
-        CircleAvatar(
-          backgroundColor: Colors.white.withAlpha(100),
-          radius: 32.5,
-          child: PlayerPicture(image: image, name: name),
-        ),
+        PlayerPicture(image: image, name: name),
+
         const SizedBox(width: 20),
+
         Expanded(
           child: Text(
             name,
@@ -32,7 +30,11 @@ class PlayerInfo extends StatelessWidget {
             overflow: TextOverflow.ellipsis,
           ),
         ),
-        Icon(isSelected ? Icons.check_box : Icons.check_box_outlined, size: 32),
+
+        Icon(
+          isSelected ? Icons.check_box : Icons.check_box_outline_blank,
+          size: 32,
+        ),
       ],
     );
   }
