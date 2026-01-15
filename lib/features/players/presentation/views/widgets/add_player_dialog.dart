@@ -59,11 +59,13 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
                     },
                   ),
                   const SizedBox(height: 30),
-                  CustomButton(
-                    label: 'Add',
-                    onTap: () {
-                      _onAddPlayer(context);
-                    },
+                  Center(
+                    child: CustomButton(
+                      label: 'Add',
+                      onTap: () {
+                        _onAddPlayer(context);
+                      },
+                    ),
                   ),
                 ],
               ),
