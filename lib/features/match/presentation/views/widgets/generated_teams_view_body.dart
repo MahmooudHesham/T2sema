@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:t2sema/core/utils/app_styles.dart';
-import 'package:t2sema/features/match/presentation/views/widgets/compact_players_list.dart';
 import 'package:t2sema/features/match/presentation/views/widgets/generated_teams_bottom_bar.dart';
+import 'package:t2sema/features/match/presentation/views/widgets/team_column.dart';
 
 class GeneratedTeamsViewBody extends StatelessWidget {
   const GeneratedTeamsViewBody({
@@ -21,17 +20,14 @@ class GeneratedTeamsViewBody extends StatelessWidget {
           const SizedBox(height: 30),
           Expanded(
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 // ==== Left Side (Team A)====
                 Expanded(
-                  child: Column(
-                    children: [
-                      Text("Team A", style: AppStyles.textStyleBold32),
-                      const SizedBox(height: 10),
-                      Expanded(
-                        child: CompactPlayersList(names: teamA, isTeamA: true),
-                      ),
-                    ],
+                  child: TeamColumn(
+                    title: 'Team A',
+                    players: teamA,
+                    isTeamA: true,
                   ),
                 ),
 
@@ -40,20 +36,20 @@ class GeneratedTeamsViewBody extends StatelessWidget {
 
                 // ==== Right Side (Team B)====
                 Expanded(
-                  child: Column(
-                    children: [
-                      Text("Team B", style: AppStyles.textStyleBold32),
-                      const SizedBox(height: 10),
-                      Expanded(
-                        child: CompactPlayersList(names: teamB, isTeamA: false),
-                      ),
-                    ],
+                  child: TeamColumn(
+                    players: teamB,
+                    title: 'Team B',
+                    isTeamA: false,
                   ),
                 ),
               ],
             ),
           ),
-          const GeneratedTeamsBottomBar(),
+          const SafeArea(
+            top: false,
+            minimum: EdgeInsets.only(bottom: 20),
+            child: GeneratedTeamsBottomBar(),
+          ),
         ],
       ),
     );
