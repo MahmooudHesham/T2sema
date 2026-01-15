@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:t2sema/features/match/presentation/views/widgets/compact_player_card.dart';
 
-class GeneratedTeamsListView extends StatelessWidget {
-  const GeneratedTeamsListView({
+class CompactPlayersList extends StatelessWidget {
+  const CompactPlayersList({
     super.key,
     required this.names,
     required this.isTeamA,

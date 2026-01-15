@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:t2sema/features/match/presentation/views/widgets/generated_teams_list_view.dart';
+import 'package:t2sema/features/match/presentation/views/widgets/compact_players_list.dart';
 
 class GeneratedTeamsViewBody extends StatelessWidget {
   const GeneratedTeamsViewBody({
@@ -21,11 +21,11 @@ class GeneratedTeamsViewBody extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: GeneratedTeamsListView(names: teamA, isTeamA: true),
+                  child: CompactPlayersList(names: teamA, isTeamA: true),
                 ),
                 const SizedBox(width: 30),
                 Expanded(
-                  child: GeneratedTeamsListView(names: teamB, isTeamA: false),
+                  child: CompactPlayersList(names: teamB, isTeamA: false),
                 ),
               ],
             ),
