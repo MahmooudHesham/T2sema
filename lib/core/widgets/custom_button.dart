@@ -45,7 +45,7 @@ class CustomButton extends StatelessWidget {
           width: width,
           height: height,
           alignment: Alignment.center,
-          padding: const EdgeInsets.symmetric(horizontal: 24),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 8),
           child: isLoading
               ? _buildLoader(effectiveTextColor)
               : _buildLabel(baseStyle, effectiveTextColor),
