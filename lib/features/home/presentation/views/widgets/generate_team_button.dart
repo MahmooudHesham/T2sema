@@ -11,8 +11,22 @@ class GenerateTeamButton extends StatelessWidget {
     return GlassCircleButton(
       iconPath: 'assets/icons/ic_generate.svg',
       onTap: () {
-        final dummyA = ["Mahmoud", "Salah", "Nasooh", "Messi"];
-        final dummyB = ["Ronaldo", "Nussairy", "ElKholy", "Mbappe"];
+        final dummyA = [
+          "Mahmoud",
+          "Salah",
+          "Nasooh",
+          "Messi",
+          "Anass",
+          "Hamed",
+        ];
+        final dummyB = [
+          "Ronaldo",
+          "Nussairy",
+          "ElKholy",
+          "Mbappe",
+          "Muhammed AlKaddy",
+          "Ahmed Hesham",
+        ];
         context.push(
           AppRouter.kGeneratedTeamsView,
           extra: {'teamA': dummyA, 'teamB': dummyB},

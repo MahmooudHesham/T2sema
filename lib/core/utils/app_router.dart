@@ -15,7 +15,7 @@ abstract class AppRouter {
           final teamA = data['teamA'];
           final teamB = data['teamB'];
 
-          return const GeneratedTeamsView();
+          return GeneratedTeamsView(teamA: teamA!, teamB: teamB!);
         },
       ),
     ],
