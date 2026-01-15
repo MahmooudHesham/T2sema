@@ -20,17 +20,17 @@ class CompactPlayerCard extends StatelessWidget {
         color: teamA ? AppColors.teamA : AppColors.teamB,
         borderRadius: BorderRadius.circular(12),
       ),
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 8),
       child: Row(
         children: [
           const Icon(Icons.drag_indicator),
-          const SizedBox(width: 15),
+          const SizedBox(width: 2),
           PlayerPicture(image: image, name: name, radius: 20),
           const SizedBox(width: 10),
           Expanded(
             child: Text(
               name,
-              style: AppStyles.textStyleRegular14,
+              style: AppStyles.textStyleRegular11,
               overflow: TextOverflow.ellipsis,
               maxLines: 1,
             ),
