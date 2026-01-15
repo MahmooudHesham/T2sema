@@ -54,21 +54,18 @@ class CustomButton extends StatelessWidget {
     );
   }
 
-  SizedBox _buildLoader(Color effectiveTextColor) {
+  SizedBox _buildLoader(Color color) {
     return SizedBox(
       width: 24,
       height: 24,
-      child: CircularProgressIndicator(
-        color: effectiveTextColor,
-        strokeWidth: 3,
-      ),
+      child: CircularProgressIndicator(color: color, strokeWidth: 3),
     );
   }
 
-  FittedBox _buildLabel(TextStyle baseStyle, Color effectiveTextColor) {
+  FittedBox _buildLabel(TextStyle baseStyle, Color color) {
     return FittedBox(
       fit: BoxFit.scaleDown,
-      child: Text(label, style: baseStyle.copyWith(color: effectiveTextColor)),
+      child: Text(label, style: baseStyle.copyWith(color: color)),
     );
   }
 }
