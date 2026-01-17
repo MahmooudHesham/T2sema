@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:t2sema/core/utils/app_colors.dart';
 import 'package:t2sema/core/utils/app_router.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:t2sema/core/utils/service_locator.dart';
 import 'package:t2sema/features/players/data/models/player_model.dart';
 import 'package:t2sema/features/players/data/repos/players_repo_impl.dart';
 
@@ -10,6 +11,8 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(PlayerModelAdapter());
   await Hive.openBox<PlayerModel>(PlayersRepoImpl.kPlayersBox);
+  setupServiceLocator();
+
   runApp(const T2semaApp());
 }
 
