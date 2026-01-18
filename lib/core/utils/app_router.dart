@@ -7,7 +7,7 @@ import 'package:t2sema/features/home/presentation/views/home_view.dart';
 import 'package:t2sema/features/match/presentation/views/generated_teams_view.dart';
 import 'package:t2sema/features/match/presentation/views/player_selection_view.dart';
 import 'package:t2sema/features/players/data/repos/players_repo.dart';
-import 'package:t2sema/features/players/presentation/manager/players/players_cubit.dart';
+import 'package:t2sema/features/players/presentation/manager/players_cubit/players_cubit.dart';
 
 abstract class AppRouter {
   static const kHome = '/home';

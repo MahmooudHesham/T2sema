@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t2sema/core/utils/app_styles.dart';
 import 'package:t2sema/core/widgets/custom_snack_bar.dart';
 import 'package:t2sema/features/players/data/models/player_model.dart';
-import 'package:t2sema/features/players/presentation/manager/players/players_cubit.dart';
+import 'package:t2sema/features/players/presentation/manager/players_cubit/players_cubit.dart';
 import 'package:t2sema/features/players/presentation/views/widgets/player_list_view.dart';
 
 class PlayerSelectionView extends StatefulWidget {
