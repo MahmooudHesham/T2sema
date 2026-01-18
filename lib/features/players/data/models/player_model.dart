@@ -9,5 +9,7 @@ class PlayerModel {
   @HiveField(1)
   final String name;
 
-  const PlayerModel({required this.id, required this.name});
+  @HiveField(2)
+  final String? imagePath;
+  const PlayerModel({required this.id, required this.name, this.imagePath});
 }

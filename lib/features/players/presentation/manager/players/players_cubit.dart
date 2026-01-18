@@ -20,11 +20,15 @@ class PlayersCubit extends Cubit<PlayersState> {
     }
   }
 
-  Future<void> addPlayer(String name) async {
+  Future<void> addPlayer({required String name, String? imagePath}) async {
     emit(PlayersLoading());
     try {
       var uniqueId = const Uuid().v4();
-      PlayerModel newPlayer = PlayerModel(id: uniqueId, name: name);
+      PlayerModel newPlayer = PlayerModel(
+        id: uniqueId,
+        name: name,
+        imagePath: imagePath,
+      );
       await playersRepo.addPlayer(player: newPlayer);
       await fetchAllPlayers();
     } catch (e) {
