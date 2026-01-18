@@ -18,6 +18,7 @@ class PlayerCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
+
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -25,7 +26,7 @@ class PlayerCard extends StatelessWidget {
           color: isSelected
               ? AppColors.selected.withAlpha(150)
               : AppColors.notSelected,
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(16),
         ),
         child: PlayerInfo(image: image, name: name, isSelected: isSelected),
       ),

@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 part 'player_model.g.dart';
 
 @HiveType(typeId: 0)
-class PlayerModel {
+class PlayerModel extends HiveObject {
   @HiveField(0)
   final String id;
 
@@ -11,5 +11,5 @@ class PlayerModel {
 
   @HiveField(2)
   final String? imagePath;
-  const PlayerModel({required this.id, required this.name, this.imagePath});
+  PlayerModel({required this.id, required this.name, this.imagePath});
 }

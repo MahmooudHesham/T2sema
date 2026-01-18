@@ -11,9 +11,8 @@ class PlayersRepoImpl extends PlayersRepo {
   }
 
   @override
-  Future<void> deletePlayer({required String id}) async {
-    var box = Hive.box<PlayerModel>(kPlayersBox);
-    await box.delete(id);
+  Future<void> deletePlayer({required PlayerModel player}) async {
+    await player.delete();
   }
 
   @override

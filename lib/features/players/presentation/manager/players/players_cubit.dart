@@ -35,4 +35,13 @@ class PlayersCubit extends Cubit<PlayersState> {
       emit(PlayersFailure(errMsg: e.toString()));
     }
   }
+
+  Future<void> deletePlayer(PlayerModel player) async {
+    try {
+      await playersRepo.deletePlayer(player: player);
+      await fetchAllPlayers();
+    } catch (e) {
+      emit(PlayersFailure(errMsg: e.toString()));
+    }
+  }
 }

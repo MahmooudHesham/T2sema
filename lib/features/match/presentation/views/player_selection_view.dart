@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t2sema/core/utils/app_styles.dart';
+import 'package:t2sema/core/widgets/custom_snack_bar.dart';
 import 'package:t2sema/features/players/presentation/manager/players/players_cubit.dart';
 import 'package:t2sema/features/players/presentation/views/widgets/player_list_view.dart';
 
@@ -12,21 +13,7 @@ class PlayerSelectionView extends StatefulWidget {
 }
 
 class _PlayerSelectionViewState extends State<PlayerSelectionView> {
-  // final List<String> playerNames = [
-  //   "Mahmoud Hesham",
-  //   "Nasooh Nabil",
-  //   "Muhammed AlKady",
-  //   "ElKholy",
-  //   "Khalaf",
-  //   "Mahmoud Hamed",
-  //   "Ahmed Hesham",
-  //   "Nussairy",
-  //   "MO Salah",
-  //   "Messi",
-  //   "CR7",
-  // ];
-
-  final Set<int> selectedIndices = {};
+  final Set<String> selectedPlayerIds = {};
 
   @override
   Widget build(BuildContext context) {
@@ -36,21 +23,38 @@ class _PlayerSelectionViewState extends State<PlayerSelectionView> {
         children: [
           const SizedBox(height: 30),
           Text(
-            'Player Selected #${selectedIndices.length}',
+            'Player Selected #${selectedPlayerIds.length}',
             style: AppStyles.textStyleSemiBold16,
           ),
           const SizedBox(height: 30),
           Expanded(
-            child: BlocBuilder<PlayersCubit, PlayersState>(
+            child: BlocConsumer<PlayersCubit, PlayersState>(
+              listener: (context, state) {
+                if (state is PlayersSuccess) {
+                  _syncSelectionWithData(state);
+                } else if (state is PlayersFailure) {
+                  showCustomSnackBar(
+                    context,
+                    message: state.errMsg,
+                    isError: true,
+                  );
+                }
+              },
               builder: (context, state) {
                 if (state is PlayersSuccess) {
                   return PlayersListView(
                     players: state.players,
-                    selectedIndices: selectedIndices,
+                    selectedPlayerIds: selectedPlayerIds,
                     onPlayerToggle: _toggleSelection,
                   );
                 } else if (state is PlayersFailure) {
-                  return Center(child: Text(state.errMsg));
+                  return Center(
+                    child: Text(
+                      "Something went wrong: ${state.errMsg}",
+                      textAlign: TextAlign.center,
+                      style: AppStyles.textStyleMedium14,
+                    ),
+                  );
                 } else {
                   return const Center(child: CircularProgressIndicator());
                 }
@@ -62,12 +66,19 @@ class _PlayerSelectionViewState extends State<PlayerSelectionView> {
     );
   }
 
-  void _toggleSelection(int index) {
+  void _syncSelectionWithData(PlayersSuccess state) {
     setState(() {
-      if (selectedIndices.contains(index)) {
-        selectedIndices.remove(index);
+      final validIds = state.players.map((e) => e.id).toSet();
+      selectedPlayerIds.retainAll(validIds);
+    });
+  }
+
+  void _toggleSelection(String playerId) {
+    setState(() {
+      if (selectedPlayerIds.contains(playerId)) {
+        selectedPlayerIds.remove(playerId);
       } else {
-        selectedIndices.add(index);
+        selectedPlayerIds.add(playerId);
       }
     });
   }
