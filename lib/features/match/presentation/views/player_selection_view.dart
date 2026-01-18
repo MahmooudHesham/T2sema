@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t2sema/core/utils/app_styles.dart';
+import 'package:t2sema/features/players/presentation/manager/players/players_cubit.dart';
 import 'package:t2sema/features/players/presentation/views/widgets/player_list_view.dart';
 
 class PlayerSelectionView extends StatefulWidget {
@@ -10,19 +12,19 @@ class PlayerSelectionView extends StatefulWidget {
 }
 
 class _PlayerSelectionViewState extends State<PlayerSelectionView> {
-  final List<String> playerNames = [
-    "Mahmoud Hesham",
-    "Nasooh Nabil",
-    "Muhammed AlKady",
-    "ElKholy",
-    "Khalaf",
-    "Mahmoud Hamed",
-    "Ahmed Hesham",
-    "Nussairy",
-    "MO Salah",
-    "Messi",
-    "CR7",
-  ];
+  // final List<String> playerNames = [
+  //   "Mahmoud Hesham",
+  //   "Nasooh Nabil",
+  //   "Muhammed AlKady",
+  //   "ElKholy",
+  //   "Khalaf",
+  //   "Mahmoud Hamed",
+  //   "Ahmed Hesham",
+  //   "Nussairy",
+  //   "MO Salah",
+  //   "Messi",
+  //   "CR7",
+  // ];
 
   final Set<int> selectedIndices = {};
 
@@ -39,10 +41,20 @@ class _PlayerSelectionViewState extends State<PlayerSelectionView> {
           ),
           const SizedBox(height: 30),
           Expanded(
-            child: PlayersListView(
-              playerNames: playerNames,
-              selectedIndices: selectedIndices,
-              onPlayerToggle: _toggleSelection,
+            child: BlocBuilder<PlayersCubit, PlayersState>(
+              builder: (context, state) {
+                if (state is PlayersSuccess) {
+                  return PlayersListView(
+                    players: state.players,
+                    selectedIndices: selectedIndices,
+                    onPlayerToggle: _toggleSelection,
+                  );
+                } else if (state is PlayersFailure) {
+                  return Center(child: Text(state.errMsg));
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              },
             ),
           ),
         ],
