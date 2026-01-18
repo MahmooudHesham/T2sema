@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t2sema/core/utils/app_styles.dart';
 import 'package:t2sema/core/widgets/custom_snack_bar.dart';
+import 'package:t2sema/features/players/data/models/player_model.dart';
 import 'package:t2sema/features/players/presentation/manager/players/players_cubit.dart';
 import 'package:t2sema/features/players/presentation/views/widgets/player_list_view.dart';
 
@@ -42,8 +43,17 @@ class _PlayerSelectionViewState extends State<PlayerSelectionView> {
               },
               builder: (context, state) {
                 if (state is PlayersSuccess) {
+                  final sortedPlayers = List<PlayerModel>.from(state.players);
+                  sortedPlayers.sort((a, b) {
+                    final isASelected = selectedPlayerIds.contains(a.id);
+                    final isBSelected = selectedPlayerIds.contains(b.id);
+
+                    if (isASelected && !isBSelected) return -1;
+                    if (!isASelected && isBSelected) return 1;
+                    return 0;
+                  });
                   return PlayersListView(
-                    players: state.players,
+                    players: sortedPlayers,
                     selectedPlayerIds: selectedPlayerIds,
                     onPlayerToggle: _toggleSelection,
                   );
