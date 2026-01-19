@@ -4,11 +4,18 @@ import 'package:t2sema/core/utils/app_styles.dart';
 import 'package:t2sema/core/widgets/custom_button.dart';
 import 'package:t2sema/core/widgets/glass_dialog.dart';
 import 'package:t2sema/features/home/presentation/views/widgets/match_result_dialog.dart';
+import 'package:t2sema/features/players/data/models/player_model.dart';
 
 class GeneratedTeamsBottomBar extends StatelessWidget {
-  const GeneratedTeamsBottomBar({super.key, required this.onRegenerate});
+  const GeneratedTeamsBottomBar({
+    super.key,
+    required this.onRegenerate,
+    required this.teamA,
+    required this.teamB,
+  });
 
   final VoidCallback onRegenerate;
+  final List<PlayerModel> teamA, teamB;
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +40,7 @@ class GeneratedTeamsBottomBar extends StatelessWidget {
                   horizontal: 10,
                   vertical: 20,
                 ),
-                child: const MatchResultDialog(),
+                child: MatchResultDialog(teamA: teamA, teamB: teamB),
               );
             },
           ),

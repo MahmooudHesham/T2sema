@@ -3,11 +3,20 @@ import 'package:go_router/go_router.dart';
 import 'package:t2sema/core/utils/app_colors.dart';
 import 'package:t2sema/core/utils/app_router.dart';
 import 'package:t2sema/core/utils/app_styles.dart';
+import 'package:t2sema/core/utils/service_locator.dart';
 import 'package:t2sema/core/widgets/custom_button.dart';
+import 'package:t2sema/features/history/presentation/manager/history_cubit/history_cubit.dart';
+import 'package:t2sema/features/match/data/models/match_model.dart';
 import 'package:t2sema/features/match/presentation/views/widgets/match_result_widgets.dart';
+import 'package:t2sema/features/players/data/models/player_model.dart';
 
 class MatchResultDialog extends StatefulWidget {
-  const MatchResultDialog({super.key});
+  const MatchResultDialog({
+    super.key,
+    required this.teamA,
+    required this.teamB,
+  });
+  final List<PlayerModel> teamA, teamB;
 
   @override
   State<MatchResultDialog> createState() => _MatchResultDialogState();
@@ -16,7 +25,6 @@ class MatchResultDialog extends StatefulWidget {
 class _MatchResultDialogState extends State<MatchResultDialog> {
   int teamAScore = 0;
   int teamBScore = 0;
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -84,7 +92,15 @@ class _MatchResultDialogState extends State<MatchResultDialog> {
           child: CustomButton(
             label: 'Confirm',
             onTap: () {
-              context.go(AppRouter.kHistory, extra: true);
+              MatchModel newMatch = MatchModel(
+                date: DateTime.now(),
+                firstScore: teamAScore,
+                secondScore: teamBScore,
+                teamA: widget.teamA,
+                teamB: widget.teamB,
+              );
+              getIt<HistoryCubit>().saveMatch(newMatch);
+              context.go(AppRouter.kHistory);
             },
           ),
         ),

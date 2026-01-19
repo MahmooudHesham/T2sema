@@ -5,7 +5,6 @@ import 'package:t2sema/core/utils/service_locator.dart';
 import 'package:t2sema/features/history/presentation/manager/history_cubit/history_cubit.dart';
 import 'package:t2sema/features/history/presentation/views/history_view.dart';
 import 'package:t2sema/features/home/presentation/views/home_view.dart';
-import 'package:t2sema/features/match/data/repos/match_repo.dart';
 import 'package:t2sema/features/match/presentation/manager/match_cubit/match_cubit.dart';
 import 'package:t2sema/features/match/presentation/views/generated_teams_view.dart';
 import 'package:t2sema/features/match/presentation/views/player_selection_view.dart';
@@ -46,8 +45,8 @@ abstract class AppRouter {
             routes: [
               GoRoute(
                 path: kHistory,
-                builder: (context, state) => BlocProvider(
-                  create: (context) => HistoryCubit(getIt.get<MatchRepo>()),
+                builder: (context, state) => BlocProvider.value(
+                  value: getIt<HistoryCubit>(),
                   child: const HistoryView(),
                 ),
               ),

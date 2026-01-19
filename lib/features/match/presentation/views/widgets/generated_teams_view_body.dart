@@ -91,6 +91,8 @@ class _GeneratedTeamsViewBodyState extends State<GeneratedTeamsViewBody> {
           top: false,
           minimum: const EdgeInsets.symmetric(horizontal: 15, vertical: 20),
           child: GeneratedTeamsBottomBar(
+            teamA: copyOfTeamA,
+            teamB: copyOfTeamB,
             onRegenerate: () {
               final allPlayers = [...widget.teamA, ...widget.teamB];
 
