@@ -16,7 +16,7 @@ class GenerateTeamButton extends StatelessWidget {
       duration: const Duration(milliseconds: 300),
       opacity: isActive ? 1.0 : 0.5,
       child: GlassCircleButton(
-        iconPath: 'assets/icons/ic_generate.svg',
+        iconPath: 'assets/icons/ic_dice.svg',
         onTap: isActive ? onPressed : null,
       ),
     );
