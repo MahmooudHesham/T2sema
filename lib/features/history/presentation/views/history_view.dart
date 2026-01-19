@@ -21,7 +21,7 @@ class HistoryView extends StatelessWidget {
     final List<MatchModel> dummyMatches = [
       // Match 1: Close game
       MatchModel(
-        date: "12/01/2026",
+        date: DateTime(2026, 1, 12),
         firstScore: 8,
         secondScore: 7,
         teamA: [p1, p2, p3], // Ahmed, Mohamed, Sayed
@@ -30,7 +30,7 @@ class HistoryView extends StatelessWidget {
 
       // Match 2: Big win
       MatchModel(
-        date: "05/01/2026",
+        date: DateTime(2026, 1, 5),
         firstScore: 12,
         secondScore: 4,
         teamA: [p1, p5], // Ahmed, Ali
@@ -39,7 +39,7 @@ class HistoryView extends StatelessWidget {
 
       // Match 3: Draw
       MatchModel(
-        date: "28/12/2025",
+        date: DateTime.now(),
         firstScore: 6,
         secondScore: 6,
         teamA: [p2, p4],

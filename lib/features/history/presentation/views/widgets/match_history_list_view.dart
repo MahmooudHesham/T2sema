@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:t2sema/core/utils/app_styles.dart';
 import 'package:t2sema/features/history/presentation/views/widgets/match_history_card.dart';
 import 'package:t2sema/features/match/data/models/match_model.dart';
@@ -25,7 +26,7 @@ class MatchHistoryListView extends StatelessWidget {
       itemBuilder: (context, index) {
         final match = matches[index];
         return MatchHistoryCard(
-          date: match.date,
+          date: DateFormat('dd/MM/yyyy').format(match.date),
           firstScore: match.firstScore,
           secondScore: match.secondScore,
           teamA: match.teamA,
