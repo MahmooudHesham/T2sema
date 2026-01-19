@@ -73,6 +73,10 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
       );
 
       Navigator.pop(context);
+      showCustomSnackBar(
+        context,
+        message: "${nameController.text} joined the squad !",
+      );
     } else {
       setState(() {
         autovalidateMode = AutovalidateMode.always;
