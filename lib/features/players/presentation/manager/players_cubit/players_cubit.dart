@@ -8,20 +8,41 @@ part 'players_state.dart';
 
 class PlayersCubit extends Cubit<PlayersState> {
   PlayersCubit(this.playersRepo) : super(PlayersInitial());
+
   final PlayersRepo playersRepo;
+  Set<String> _currentSelection = {};
 
   Future<void> fetchAllPlayers() async {
-    emit(PlayersLoading());
+    if (state is! PlayersSuccess) {
+      emit(PlayersLoading());
+    }
     try {
       List<PlayerModel> players = await playersRepo.getAllPlayers();
-      emit(PlayersSuccess(players: players));
+      final allPlayersId = players.map((e) => e.id).toSet();
+      _currentSelection.removeWhere((id) => !allPlayersId.contains(id));
+      emit(PlayersSuccess(players: players, selectedId: _currentSelection));
     } catch (e) {
       emit(PlayersFailure(errMsg: e.toString()));
     }
   }
 
+  void toggleSelection(String playerId) {
+    if (state is PlayersSuccess) {
+      final currentPlayer = (state as PlayersSuccess).players;
+
+      final newSelection = Set<String>.from(_currentSelection);
+      if (newSelection.contains(playerId)) {
+        newSelection.remove(playerId);
+      } else {
+        newSelection.add(playerId);
+      }
+      _currentSelection = newSelection;
+
+      emit(PlayersSuccess(players: currentPlayer, selectedId: newSelection));
+    }
+  }
+
   Future<void> addPlayer({required String name, String? imagePath}) async {
-    emit(PlayersLoading());
     try {
       var uniqueId = const Uuid().v4();
       PlayerModel newPlayer = PlayerModel(

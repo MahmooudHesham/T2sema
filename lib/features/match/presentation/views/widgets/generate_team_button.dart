@@ -1,37 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
-import 'package:t2sema/core/utils/app_router.dart';
 import 'package:t2sema/core/widgets/glass_circle_button.dart';
 
 class GenerateTeamButton extends StatelessWidget {
-  const GenerateTeamButton({super.key});
+  const GenerateTeamButton({
+    super.key,
+    required this.isActive,
+    required this.onPressed,
+  });
 
+  final bool isActive;
+  final VoidCallback onPressed;
   @override
   Widget build(BuildContext context) {
-    return GlassCircleButton(
-      iconPath: 'assets/icons/ic_generate.svg',
-      onTap: () {
-        final dummyA = [
-          "Mahmoud",
-          "Salah",
-          "Nasooh",
-          "Messi",
-          "Anass",
-          "Hamed",
-        ];
-        final dummyB = [
-          "Ronaldo",
-          "Nussairy",
-          "ElKholy",
-          "Mbappe",
-          "Muhammed AlKaddy",
-          "Ahmed Hesham",
-        ];
-        context.push(
-          AppRouter.kGeneratedTeamsView,
-          extra: {'teamA': dummyA, 'teamB': dummyB},
-        );
-      },
+    return AnimatedOpacity(
+      duration: const Duration(milliseconds: 300),
+      opacity: isActive ? 1.0 : 0.5,
+      child: GlassCircleButton(
+        iconPath: 'assets/icons/ic_generate.svg',
+        onTap: isActive ? onPressed : null,
+      ),
     );
   }
 }

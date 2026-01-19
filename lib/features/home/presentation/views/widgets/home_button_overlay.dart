@@ -9,10 +9,14 @@ class HomeButtonOverlay extends StatelessWidget {
     super.key,
     required this.currentIndex,
     required this.onNavTap,
+    required this.hasEnoughPlayer,
+    required this.onGeneratedTap,
   });
 
   final int currentIndex;
   final ValueChanged<int> onNavTap;
+  final bool hasEnoughPlayer;
+  final VoidCallback onGeneratedTap;
 
   @override
   Widget build(BuildContext context) {
@@ -41,7 +45,10 @@ class HomeButtonOverlay extends StatelessWidget {
             _AnimatedFader(
               isVisible: isHome,
               skipAnimation: skipAnimation,
-              child: const GenerateTeamButton(),
+              child: GenerateTeamButton(
+                isActive: hasEnoughPlayer,
+                onPressed: onGeneratedTap,
+              ),
             ),
           ],
         ),
