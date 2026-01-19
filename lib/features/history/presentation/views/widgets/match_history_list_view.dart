@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
-import 'package:t2sema/core/utils/app_styles.dart';
 import 'package:t2sema/core/widgets/confirm_delete_dialog.dart';
 import 'package:t2sema/core/widgets/custom_dismiss_background.dart';
 import 'package:t2sema/core/widgets/custom_snack_bar.dart';
@@ -14,15 +13,6 @@ class MatchHistoryListView extends StatelessWidget {
   final List<MatchModel> matches;
   @override
   Widget build(BuildContext context) {
-    if (matches.isEmpty) {
-      return Center(
-        child: Text(
-          "No Match History yet",
-          style: AppStyles.textStyleRegular16,
-        ),
-      );
-    }
-
     return ListView.separated(
       physics: const ClampingScrollPhysics(),
       padding: const EdgeInsets.only(bottom: 120),

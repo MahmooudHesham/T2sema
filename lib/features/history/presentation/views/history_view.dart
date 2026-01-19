@@ -19,25 +19,18 @@ class HistoryView extends StatelessWidget {
             if (state is HistorySuccess) {
               return Column(
                 children: [
-                  Column(
-                    children: [
-                      const SizedBox(height: 30),
-                      Text(
-                        'Matches History',
-                        style: AppStyles.textStyleMedium24,
+                  const SizedBox(height: 30),
+                  Text('Matches History', style: AppStyles.textStyleMedium24),
+                  const SizedBox(height: 20),
+                  Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.only(
+                        right: 50,
+                        left: 50,
+                        bottom: 100,
                       ),
-                      const SizedBox(height: 20),
-                      Expanded(
-                        child: Padding(
-                          padding: const EdgeInsets.only(
-                            right: 50,
-                            left: 50,
-                            bottom: 100,
-                          ),
-                          child: MatchHistoryListView(matches: state.matches),
-                        ),
-                      ),
-                    ],
+                      child: MatchHistoryListView(matches: state.matches),
+                    ),
                   ),
                 ],
               );
