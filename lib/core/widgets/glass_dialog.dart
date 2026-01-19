@@ -19,9 +19,7 @@ class GlassDialog extends StatelessWidget {
           width: double.infinity,
           borderRadius: 12,
           child: Padding(
-            padding:
-                padding ??
-                const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
+            padding: padding ?? const EdgeInsets.fromLTRB(40, 20, 40, 30),
             child: child,
           ),
         ),

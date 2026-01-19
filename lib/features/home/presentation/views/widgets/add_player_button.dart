@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t2sema/core/widgets/glass_circle_button.dart';
 import 'package:t2sema/core/widgets/glass_dialog.dart';
 import 'package:t2sema/features/players/presentation/manager/players_cubit/players_cubit.dart';
-import 'package:t2sema/features/players/presentation/views/widgets/add_player_dialog.dart';
+import 'package:t2sema/features/players/presentation/views/widgets/player_action_dialog.dart';
 
 class AddPlayerButton extends StatelessWidget {
   const AddPlayerButton({super.key});
@@ -17,7 +17,7 @@ class AddPlayerButton extends StatelessWidget {
           context: context,
           child: BlocProvider.value(
             value: context.read<PlayersCubit>(),
-            child: const AddPlayerDialog(),
+            child: const PlayerActionDialog(),
           ),
         );
       },

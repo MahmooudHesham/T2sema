@@ -41,8 +41,7 @@ class PlayersListView extends StatelessWidget {
           },
           onDismissed: (direction) => _deletePlayer(context, player),
           child: PlayerCard(
-            name: player.name,
-            image: player.imagePath,
+            player: player,
             isSelected: isSelected,
             onTap: () => onPlayerToggle(player.id),
           ),

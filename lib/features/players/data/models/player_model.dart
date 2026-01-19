@@ -7,9 +7,9 @@ class PlayerModel extends HiveObject {
   final String id;
 
   @HiveField(1)
-  final String name;
+  String name;
 
   @HiveField(2)
-  final String? imagePath;
+  String? imagePath;
   PlayerModel({required this.id, required this.name, this.imagePath});
 }

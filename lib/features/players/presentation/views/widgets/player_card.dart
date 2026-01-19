@@ -1,24 +1,35 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:t2sema/core/utils/app_colors.dart';
+import 'package:t2sema/core/widgets/glass_dialog.dart';
+import 'package:t2sema/features/players/data/models/player_model.dart';
+import 'package:t2sema/features/players/presentation/manager/players_cubit/players_cubit.dart';
+import 'package:t2sema/features/players/presentation/views/widgets/player_action_dialog.dart';
 import 'package:t2sema/features/players/presentation/views/widgets/player_info.dart';
 
 class PlayerCard extends StatelessWidget {
   const PlayerCard({
     super.key,
-    required this.name,
-    this.image,
+    required this.player,
     required this.isSelected,
     required this.onTap,
   });
-  final String name;
-  final String? image;
+  final PlayerModel player;
   final bool isSelected;
   final VoidCallback onTap;
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-
+      onLongPress: () {
+        showAppDialog(
+          context: context,
+          child: BlocProvider.value(
+            value: context.read<PlayersCubit>(),
+            child: PlayerActionDialog(player: player),
+          ),
+        );
+      },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
         padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 8),
@@ -28,7 +39,11 @@ class PlayerCard extends StatelessWidget {
               : AppColors.notSelected,
           borderRadius: BorderRadius.circular(16),
         ),
-        child: PlayerInfo(image: image, name: name, isSelected: isSelected),
+        child: PlayerInfo(
+          image: player.imagePath,
+          name: player.name,
+          isSelected: isSelected,
+        ),
       ),
     );
   }

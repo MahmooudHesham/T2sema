@@ -20,4 +20,9 @@ class PlayersRepoImpl extends PlayersRepo {
     var box = Hive.box<PlayerModel>(kPlayersBox);
     return box.values.toList();
   }
+
+  @override
+  Future<void> updatePlayer({required PlayerModel player}) async {
+    await player.save();
+  }
 }

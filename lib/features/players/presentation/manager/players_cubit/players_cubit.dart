@@ -71,4 +71,24 @@ class PlayersCubit extends Cubit<PlayersState> {
       emit(PlayersFailure(errMsg: e.toString()));
     }
   }
+
+  Future<void> editPlayer(
+    PlayerModel player,
+    String? name,
+    String? imagePath,
+  ) async {
+    try {
+      if (name != null) {
+        player.name = name;
+      }
+      if (imagePath != null) {
+        player.imagePath = imagePath;
+      }
+      await playersRepo.updatePlayer(player: player);
+      emit(PlayersLoading());
+      await fetchAllPlayers();
+    } catch (e) {
+      emit(PlayersFailure(errMsg: "Failed to update player: $e"));
+    }
+  }
 }

@@ -4,28 +4,33 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:t2sema/core/utils/app_colors.dart';
+import 'package:t2sema/core/utils/app_styles.dart';
 import 'package:t2sema/core/widgets/custom_button.dart';
 import 'package:t2sema/core/widgets/custom_snack_bar.dart';
 import 'package:t2sema/core/widgets/custom_text_form_field.dart';
+import 'package:t2sema/features/players/data/models/player_model.dart';
 import 'package:t2sema/features/players/presentation/manager/players_cubit/players_cubit.dart';
 import 'package:t2sema/features/players/presentation/views/widgets/player_image_picker.dart';
 
-class AddPlayerDialog extends StatefulWidget {
-  const AddPlayerDialog({super.key});
-
+class PlayerActionDialog extends StatefulWidget {
+  final PlayerModel? player;
+  const PlayerActionDialog({super.key, this.player});
   @override
-  State<AddPlayerDialog> createState() => _AddPlayerDialogState();
+  State<PlayerActionDialog> createState() => _PlayerActionDialogState();
 }
 
-class _AddPlayerDialogState extends State<AddPlayerDialog> {
+class _PlayerActionDialogState extends State<PlayerActionDialog> {
   final GlobalKey<FormState> formKey = GlobalKey();
   late final TextEditingController nameController;
   AutovalidateMode autovalidateMode = AutovalidateMode.disabled;
   File? selectedImage;
+  String? imagePath;
+
   @override
   void initState() {
     super.initState();
-    nameController = TextEditingController();
+    nameController = TextEditingController(text: widget.player?.name);
+    imagePath = widget.player?.imagePath;
   }
 
   @override
@@ -36,6 +41,10 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
 
   @override
   Widget build(BuildContext context) {
+    final isEditing = widget.player != null;
+
+    File? imageToShow =
+        selectedImage ?? (imagePath != null ? File(imagePath!) : null);
     return Form(
       key: formKey,
       autovalidateMode: autovalidateMode,
@@ -43,19 +52,24 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
+            Text(
+              isEditing ? 'Edit Player' : "Add Player",
+              style: AppStyles.textStyleMedium24,
+            ),
+            const SizedBox(height: 25),
             CustomTextFormField(
               hintText: 'Player Name',
               controller: nameController,
               validator: _validateName,
             ),
             const SizedBox(height: 30),
-            PlayerImagePicker(image: selectedImage, onTap: _pickImage),
+            PlayerImagePicker(image: imageToShow, onTap: _pickImage),
             const SizedBox(height: 30),
             Center(
               child: CustomButton(
-                label: 'Add',
+                label: isEditing ? "Edit" : 'Add',
                 onTap: () {
-                  _onAddPlayer(context);
+                  _onSave(context);
                 },
               ),
             ),
@@ -65,17 +79,27 @@ class _AddPlayerDialogState extends State<AddPlayerDialog> {
     );
   }
 
-  void _onAddPlayer(BuildContext context) {
+  void _onSave(BuildContext context) {
+    final isEditing = widget.player != null;
     if (formKey.currentState!.validate()) {
-      context.read<PlayersCubit>().addPlayer(
-        name: nameController.text,
-        imagePath: selectedImage?.path,
-      );
-
+      if (!isEditing) {
+        context.read<PlayersCubit>().addPlayer(
+          name: nameController.text,
+          imagePath: selectedImage?.path,
+        );
+      } else {
+        context.read<PlayersCubit>().editPlayer(
+          widget.player!,
+          nameController.text,
+          selectedImage?.path,
+        );
+      }
       Navigator.pop(context);
       showCustomSnackBar(
         context,
-        message: "${nameController.text} joined the squad !",
+        message: isEditing
+            ? "${nameController.text} updated successfully"
+            : "${nameController.text} joined the squad!",
       );
     } else {
       setState(() {
