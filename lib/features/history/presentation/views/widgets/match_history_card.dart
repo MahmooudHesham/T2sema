@@ -101,7 +101,15 @@ class _MatchHistoryCardState extends State<MatchHistoryCard> {
         Text(title, style: AppStyles.textStyleRegular18),
         const SizedBox(height: 10),
         ...players.map(
-          (player) => Text(player.name, style: AppStyles.textStyleLight18),
+          (player) => Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10),
+            child: Text(
+              player.name,
+              maxLines: 1,
+              overflow: TextOverflow.ellipsis,
+              style: AppStyles.textStyleLight16,
+            ),
+          ),
         ),
       ],
     );

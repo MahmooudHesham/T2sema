@@ -15,6 +15,11 @@ abstract class AppStyles {
   // =========================
   // Light (w300)
   // =========================
+  static final TextStyle textStyleLight16 = _baseStyle.copyWith(
+    fontSize: 16,
+    fontWeight: FontWeight.w300,
+  );
+
   static final TextStyle textStyleLight18 = _baseStyle.copyWith(
     fontSize: 18,
     fontWeight: FontWeight.w300,
