@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taqsema/core/utils/app_colors.dart';
+import 'package:taqsema/core/utils/app_haptics.dart';
 import 'package:taqsema/core/utils/app_styles.dart';
 import 'package:taqsema/features/players/data/models/player_model.dart';
 
@@ -28,6 +29,7 @@ class _MatchHistoryCardState extends State<MatchHistoryCard> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        AppHaptics.buttonPress();
         setState(() {
           isExpanded = !isExpanded;
         });

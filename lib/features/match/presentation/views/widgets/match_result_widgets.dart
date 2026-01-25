@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taqsema/core/utils/app_colors.dart';
+import 'package:taqsema/core/utils/app_haptics.dart';
 import 'package:taqsema/core/utils/app_styles.dart';
 
 class TeamScoreSelector extends StatelessWidget {
@@ -63,7 +64,10 @@ class StepperButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: () {
+        AppHaptics.selection();
+        onTap();
+      },
       borderRadius: BorderRadius.circular(50),
       child: Container(
         padding: const EdgeInsets.all(6),

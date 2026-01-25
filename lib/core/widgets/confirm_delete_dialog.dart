@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:taqsema/core/utils/app_colors.dart';
+import 'package:taqsema/core/utils/app_haptics.dart';
 import 'package:taqsema/core/utils/app_styles.dart';
 
 Future<bool?> showDeleteConfirmDialog({
@@ -17,11 +18,17 @@ Future<bool?> showDeleteConfirmDialog({
         ),
         actions: <Widget>[
           TextButton(
-            onPressed: () => Navigator.of(context).pop(false),
+            onPressed: () {
+              AppHaptics.buttonPress();
+              Navigator.of(context).pop(false);
+            },
             child: const Text('Cancel', style: TextStyle(color: Colors.grey)),
           ),
           TextButton(
-            onPressed: () => Navigator.of(context).pop(true),
+            onPressed: () {
+              AppHaptics.selection();
+              Navigator.of(context).pop(true);
+            },
             child: Text(
               "Delete",
               style: AppStyles.textStyleMedium14.copyWith(

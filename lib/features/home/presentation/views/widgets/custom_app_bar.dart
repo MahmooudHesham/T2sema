@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:taqsema/core/utils/app_haptics.dart';
 import 'package:taqsema/core/utils/constants.dart';
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
@@ -15,7 +16,10 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       scrolledUnderElevation: 0,
       leading: onLeadingPressed != null
           ? IconButton(
-              onPressed: onLeadingPressed,
+              onPressed: () {
+                AppHaptics.buttonPress();
+                onLeadingPressed!();
+              },
               icon: const Icon(Icons.arrow_back_ios_new),
             )
           : null,

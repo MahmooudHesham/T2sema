@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:taqsema/core/utils/app_haptics.dart';
 import 'package:taqsema/core/widgets/confirm_delete_dialog.dart';
 import 'package:taqsema/core/widgets/custom_dismiss_background.dart';
 import 'package:taqsema/core/widgets/custom_snack_bar.dart';
@@ -24,7 +25,9 @@ class MatchHistoryListView extends StatelessWidget {
           key: Key(match.key.toString()),
           direction: DismissDirection.endToStart,
           background: const CustomDismissBackground(),
-          confirmDismiss: (direction) {
+          confirmDismiss: (direction) async {
+            await AppHaptics.heavyWarning();
+            if (!context.mounted) return false;
             return showDeleteConfirmDialog(
               context: context,
               itemName: 'this match',
