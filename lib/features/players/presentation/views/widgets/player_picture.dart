@@ -32,6 +32,9 @@ class PlayerPicture extends StatelessWidget {
   ImageProvider? _getImageProvider(String? imagePath) {
     if (imagePath == null || imagePath.isEmpty) return null;
 
+    // SVG files cannot be loaded as ImageProvider
+    if (imagePath.endsWith('.svg')) return null;
+
     if (imagePath.startsWith('assets/')) {
       return AssetImage(imagePath);
     } else {
