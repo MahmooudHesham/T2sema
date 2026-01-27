@@ -18,7 +18,7 @@ void showCustomSnackBar(
           ? AppColors.error
           : const Color.fromARGB(255, 2, 151, 112),
       behavior: SnackBarBehavior.floating,
-      margin: const EdgeInsets.only(left: 20, right: 20, bottom: 80),
+      margin: const EdgeInsets.only(left: 20, right: 20, bottom: 100),
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadiusGeometry.circular(22),
       ),
