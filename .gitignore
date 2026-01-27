@@ -49,3 +49,5 @@ GEMINI.md
 key.properties
 **/*.jks
 **/*.keystore
+
+PROJECT_SUMMARY.md
