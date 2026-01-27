@@ -9,6 +9,10 @@
 
 Built with a focus on **Clean Architecture**, **Performance**, and **Premium UX**.
 
+## 📥 Download
+
+[![Download APK](https://img.shields.io/badge/Download-APK-green?style=for-the-badge&logo=android)](https://bit.ly/taqsema)
+
 ## ✨ Features
 
 ### 🏃‍♂️ Player Management
