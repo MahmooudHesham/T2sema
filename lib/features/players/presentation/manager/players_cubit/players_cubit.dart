@@ -53,7 +53,7 @@ class PlayersCubit extends Cubit<PlayersState> {
       var uniqueId = const Uuid().v4();
       PlayerModel newPlayer = PlayerModel(
         id: uniqueId,
-        name: name,
+        name: name.trim(),
         imagePath: imagePath,
       );
       await playersRepo.addPlayer(player: newPlayer);
@@ -79,7 +79,7 @@ class PlayersCubit extends Cubit<PlayersState> {
   ) async {
     try {
       if (name != null) {
-        player.name = name;
+        player.name = name.trim();
       }
       if (imagePath != null) {
         player.imagePath = imagePath;

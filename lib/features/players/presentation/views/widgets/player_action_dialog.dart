@@ -84,15 +84,16 @@ class _PlayerActionDialogState extends State<PlayerActionDialog> {
   void _onSave(BuildContext context) {
     final isEditing = widget.player != null;
     if (formKey.currentState!.validate()) {
+      final trimmedName = nameController.text.trim();
       if (!isEditing) {
         context.read<PlayersCubit>().addPlayer(
-          name: nameController.text,
+          name: trimmedName,
           imagePath: selectedImage?.path,
         );
       } else {
         context.read<PlayersCubit>().editPlayer(
           widget.player!,
-          nameController.text,
+          trimmedName,
           selectedImage?.path,
         );
       }
@@ -100,8 +101,8 @@ class _PlayerActionDialogState extends State<PlayerActionDialog> {
       showCustomSnackBar(
         context,
         message: isEditing
-            ? '${nameController.text} updated successfully'
-            : '${nameController.text} joined the squad!',
+            ? '$trimmedName updated successfully'
+            : '$trimmedName joined the squad!',
       );
     } else {
       setState(() {
