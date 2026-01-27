@@ -31,6 +31,12 @@ Built with a focus on **Clean Architecture**, **Performance**, and **Premium UX*
 *   **Edge-to-Edge:** Modern UI design fully utilizing the screen real estate.
 *   **Dark Mode:** Sleek, battery-friendly interface.
 
+## 📸 Screenshots
+
+| Player Selection | Team Generation | Result Dialog | Match History |
+| :---: | :---: | :---: | :---: |
+| ![Selection](assets/screenshots/player_selection.png) | ![Teams](assets/screenshots/generated_teams.png) | ![Result](assets/screenshots/result_dialog.png) | ![History](assets/screenshots/history.png) |
+
 ## 🛠️ Tech Stack & Architecture
 
 This project strictly follows **Clean Architecture** (Feature-First) and **MVVM** principles.
