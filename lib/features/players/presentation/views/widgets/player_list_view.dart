@@ -57,6 +57,10 @@ class PlayersListView extends StatelessWidget {
 
   void _deletePlayer(BuildContext context, PlayerModel player) {
     context.read<PlayersCubit>().deletePlayer(player);
-    showCustomSnackBar(context, message: '${player.name} deleted');
+    showCustomSnackBar(
+      context,
+      message: '${player.name} deleted',
+      isError: true,
+    );
   }
 }

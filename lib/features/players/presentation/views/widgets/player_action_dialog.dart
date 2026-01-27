@@ -147,7 +147,11 @@ class _PlayerActionDialogState extends State<PlayerActionDialog> {
       }
     } catch (e) {
       if (mounted) {
-        showCustomSnackBar(context, message: 'Failed to pick image: $e');
+        showCustomSnackBar(
+          context,
+          message: 'Failed to pick image: $e',
+          isError: true,
+        );
       }
     }
   }
