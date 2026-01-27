@@ -44,10 +44,8 @@ app.*.map.json
 /android/app/profile
 /android/app/release
 
-GEMINI.md
 
 key.properties
 **/*.jks
 **/*.keystore
 
-PROJECT_SUMMARY.md
